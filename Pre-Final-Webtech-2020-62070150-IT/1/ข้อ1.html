@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="ef.css">
+    <title>ข้อหนึ่ง</title>
+</head>
+<body>
+    <div class="container">
+        
+<div id='input' class="in"></div>
+</div>
+    </div>
+    <script>
+        let requestURL = 'ezquiz.json';
+        let request = new XMLHttpRequest();
+        request.onreadystatechange = function () {
+            if (request.readyState == 4 && request.status == 200) {
+                dataReportStatus(JSON.parse(request.responseText));
+            }
+        };
+        request.open("GET", requestURL, true);
+        request.send();
+
+        function dataReportStatus(data)
+        {
+            var put="";
+            console.log("test")
+            for(var j = 0; j < data.tracks.items.length; j++) {
+                put += "<img width='200px' src='"+data.tracks.items[j].album.images[0].url+"'<br>";
+          
+           put += "<p><p>Artist: "+data.tracks.items[j].album.artists[0].name+"</p></p>";
+          
+
+            }
+            document.getElementById('input').innerHTML += put;
+        }
+        
+    
+    </script>
+</body>
+</html>
